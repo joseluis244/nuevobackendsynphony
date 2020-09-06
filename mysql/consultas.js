@@ -4,12 +4,18 @@ const consultasongo = require("../mongodb/consultas");
 const fs = require("fs")
 
 let sqlinit,sqlend
-
+/*
 let condata = {
   host: "localhost",
   user: "medicaltecmysql",
   password: "Medicaltec310188$",
-};
+};*/
+
+let condata = {
+    host: "medpacs.medicaltecsrl.com",
+    user: "medicaltecmysql",
+    password: "Medicaltec310188$",
+  };
 
 function BuscarEstudios(fechainicio,fechafinal,agregarseries,agregarfiles,agregarinforme){
     let con = mysql.createConnection(condata);
@@ -135,4 +141,9 @@ module.exports.BuscarEstudios = async function (inicio,final,agregarseries,agreg
 }
 module.exports.GetImagen = async function(ID){
     return Imagenes(ID)
+}
+module.exports.ListaEstudios = async function (){
+        let inicio="19200101"
+        let final=moment().format("YYYYMMDD")
+    return BuscarEstudios(inicio,final,true,false,false)
 }

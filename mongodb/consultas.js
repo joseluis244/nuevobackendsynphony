@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Informes = require("./esquemas/Informes");
+const Usuarios = require("./esquemas/Usuarios");
 mongoose.connect('mongodb://localhost/medpacs', {useNewUrlParser: true});
 const mongodb = mongoose.connection;
 
@@ -17,6 +18,16 @@ function existeinforme(ID){
     })
 }
 
+let ListaUsuarios = ()=>{
+    return new Promise((Pres,Prej)=>{
+        Usuarios.find({"CONFIGURACION.LISTABLE":true},(err,res)=>{
+            Pres(res)
+        })
+    })
+}
+
 module.exports.ExisteInforme = (ID)=>{
     return existeinforme(ID)
 }
+
+module.exports.ListaUsuarios = ListaUsuarios
