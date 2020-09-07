@@ -23,4 +23,31 @@ Router.get("/listausuarios",(req,res)=>{
         res.json(DBres)
     })
 })
+Router.put("/actualizarusuario",(req,res)=>{
+    consultasmongo.updateuser(req.body)
+    .then((Mres)=>{
+        if(Mres){
+            res.json({err:false})
+        }else{
+            res.json({err:true})
+        }
+    })
+})
+
+Router.delete("/actualizarusuario/:id",(req,res)=>{
+    consultasmongo.borrarusuario(req.params.id)
+    .then((Mres)=>{
+        if(Mres){
+            res.json({err:false})
+        }else{
+            res.json({err:true})
+        }
+    })
+})
+Router.put("/crearusuario",(req,res)=>{
+    consultasmongo.crearusuario(req.body)
+    .then((Mres)=>{
+        res.json({err:false})
+    })
+})
 module.exports = Router

@@ -5,6 +5,7 @@ var usuarios = new Schema({
     "DATOS": {
         "NOMBRE": String,
         "APELLIDO": String,
+        "PREFIJO":Number,
         "TELEFONO": Number,
         "CORREO": String
     },

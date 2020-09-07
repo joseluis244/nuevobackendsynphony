@@ -26,8 +26,43 @@ let ListaUsuarios = ()=>{
     })
 }
 
+let updateuser = (data)=>{
+    return new Promise((Pres,Prej)=>{
+        Usuarios.updateOne({_id:data._id},data,(err,data)=>{
+            if(err){
+                console.log(err)
+            }else{
+                Pres(true)
+            }
+        })
+    })
+}
+
+let borrarusuario = (data)=>{
+    return new Promise((Pres,Prej)=>{
+        Usuarios.deleteOne({_id:data},(err,data)=>{
+            if(err){
+                console.log(err)
+            }else{
+                Pres(true)
+            }
+        })
+    })
+}
+
+let crearusuario = (data)=>{
+    return new Promise((Pres,Prej)=>{
+        let user = new Usuarios(data)
+        user.save()
+        Pres(true)
+    })
+}
+
 module.exports.ExisteInforme = (ID)=>{
     return existeinforme(ID)
 }
 
 module.exports.ListaUsuarios = ListaUsuarios
+module.exports.updateuser = updateuser
+module.exports.crearusuario = crearusuario
+module.exports.borrarusuario= borrarusuario
