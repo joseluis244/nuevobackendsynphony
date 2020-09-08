@@ -50,4 +50,10 @@ Router.put("/crearusuario",(req,res)=>{
         res.json({err:false})
     })
 })
+Router.get("/cargardifucion",(req,res)=>{
+    consultasmongo.ListarDifucion()
+    .then((Mres)=>{
+        res.json(Mres)
+    })
+})
 module.exports = Router

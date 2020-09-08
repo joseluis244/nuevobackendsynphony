@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const Informes = require("./esquemas/Informes");
 const Usuarios = require("./esquemas/Usuarios");
+const Listaclientes = require("./esquemas/Listaclientes")
 mongoose.connect('mongodb://localhost/medpacs', {useNewUrlParser: true});
 const mongodb = mongoose.connection;
 
@@ -58,6 +59,13 @@ let crearusuario = (data)=>{
     })
 }
 
+let ListarDifucion = ()=>{
+    return new Promise((Pres,Prej)=>{
+        Listaclientes.find({},(err,res)=>{
+            Pres(res)
+        })
+    })
+}
 module.exports.ExisteInforme = (ID)=>{
     return existeinforme(ID)
 }
@@ -66,3 +74,4 @@ module.exports.ListaUsuarios = ListaUsuarios
 module.exports.updateuser = updateuser
 module.exports.crearusuario = crearusuario
 module.exports.borrarusuario= borrarusuario
+module.exports.ListarDifucion = ListarDifucion
