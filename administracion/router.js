@@ -50,10 +50,40 @@ Router.put("/crearusuario",(req,res)=>{
         res.json({err:false})
     })
 })
-Router.get("/cargardifucion",(req,res)=>{
+Router.get("/Difucion",(req,res)=>{
     consultasmongo.ListarDifucion()
     .then((Mres)=>{
         res.json(Mres)
     })
+})
+Router.post("/Difucion",(req,res)=>{
+    consultasmongo.AgregarDifucion(req.body)
+    .then((Mres)=>{
+        res.json(Mres)
+    })
+})
+Router.put("/Difucion",(req,res)=>{
+    consultasmongo.UpdateDifucion(req.body)
+    .then((Mres)=>{
+        res.json(Mres)
+    })
+})
+Router.delete("/Difucion/:id",(req,res)=>{
+    consultasmongo.BorrarDifucion(req.params.id)
+    .then((Mres)=>{
+        res.json(Mres)
+    })
+})
+Router.get("/estudios",(req,res)=>{
+    consultassql.BuscarEstudios(undefined,undefined,true,false,false)
+    .then((Cres)=>{
+        res.json(Cres)
+    })
+    .catch(e=>{
+        console.log(e)
+    })
+})
+Router.delete("/estudios/:id",(req,res)=>{
+    console.log(req.params.id)
 })
 module.exports = Router

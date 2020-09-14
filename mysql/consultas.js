@@ -4,19 +4,19 @@ const consultasongo = require("../mongodb/consultas");
 const fs = require("fs")
 
 let sqlinit,sqlend
-/*
+
 let condata = {
   host: "localhost",
   user: "medicaltecmysql",
   password: "Medicaltec310188$",
-};*/
-
+};
+/*
 let condata = {
     host: "medpacs.medicaltecsrl.com",
     user: "medicaltecmysql",
     password: "Medicaltec310188$",
   };
-
+*/
 function BuscarEstudios(fechainicio,fechafinal,agregarseries,agregarfiles,agregarinforme){
     let con = mysql.createConnection(condata);
     return new Promise((Pres,Prej)=>{

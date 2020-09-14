@@ -66,6 +66,29 @@ let ListarDifucion = ()=>{
         })
     })
 }
+let AgregarDifucion = (Ndif)=>{
+    return new Promise((Pres,Prej)=>{
+        let Dif = new Listaclientes(Ndif)
+        Dif.save(()=>{
+            Pres(true)
+        })
+    })
+}
+let UpdateDifucion = (dif)=>{
+    return new Promise((Pres,Prej)=>{
+        Listaclientes.updateOne({_id:dif._id},(err,res)=>{
+            console.log(res)
+            Pres(true)
+        })
+    })
+}
+let BorrarDifucion = (id)=>{
+    return new Promise((Pres,Prej)=>{
+        Listaclientes.deleteOne({_id:id},()=>{
+            Pres(true)
+        })
+    })
+}
 module.exports.ExisteInforme = (ID)=>{
     return existeinforme(ID)
 }
@@ -75,3 +98,6 @@ module.exports.updateuser = updateuser
 module.exports.crearusuario = crearusuario
 module.exports.borrarusuario= borrarusuario
 module.exports.ListarDifucion = ListarDifucion
+module.exports.AgregarDifucion = AgregarDifucion
+module.exports.UpdateDifucion = UpdateDifucion
+module.exports.BorrarDifucion = BorrarDifucion
