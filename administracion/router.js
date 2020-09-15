@@ -85,5 +85,6 @@ Router.get("/estudios",(req,res)=>{
 })
 Router.delete("/estudios/:id",(req,res)=>{
     console.log(req.params.id)
+    res.json(true)
 })
 module.exports = Router
