@@ -7,7 +7,6 @@ const cors = require("cors")
 
 const AppRouter = require("./app/router")
 const AdminRouter = require("./administracion/router")
-
 app.use(cors())
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())

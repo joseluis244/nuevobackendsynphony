@@ -1,14 +1,17 @@
 const express = require("express")
 const Router = require("express").Router()
+const fs = require('fs')
 
 
 const consultassql = require("../mysql/consultas")
 const consultasmongo = require("../mongodb/consultas")
 const Tk = require("./tokens")
+const MSsql = require('../MSsql/consoltas')
+const SistemJS = require('../sistemdata/sistem')
 
-Router.use(express.static("./administracion/estatico/"))
+Router.use(express.static("./administracion/build"))
 Router.get('/', (req, res) => {
-    res.sendfile("./administracion/views/index.html")
+    res.sendfile("./administracion/build/index.html")
 })
 
 Router.post('/keyload', (req, res) => {
@@ -81,10 +84,34 @@ Router.get("/estudios",(req,res)=>{
     })
     .catch(e=>{
         console.log(e)
+        res.status(500)
     })
 })
 Router.delete("/estudios/:id",(req,res)=>{
     console.log(req.params.id)
     res.json(true)
+})
+
+Router.get("/FuturePacientesSql/:FN/:ID",(req,res)=>{
+    MSsql.LeerPaciente(req.params.FN,req.params.ID)
+    .then((Sres)=>{
+        res.json(Sres)
+    })
+})
+Router.get("/Dashboard",(req,res)=>{
+    consultassql.Dashboard()
+    .then((Dres)=>{
+        res.json(Dres)
+    })
+})
+Router.get("/Dashboardxlsx",(req,res)=>{
+    consultassql.BuscarEstudios(undefined,undefined,true,true,false)
+    .then((Sres)=>{
+        SistemJS.crearxlsx(Sres)
+        .then((buff)=>{
+            res.set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            res.send(buff)
+        })
+    })
 })
 module.exports = Router

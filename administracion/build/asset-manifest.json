@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "./static/css/main.c167acc8.chunk.css",
+    "main.js": "./static/js/main.f2a62ee9.chunk.js",
+    "main.js.map": "./static/js/main.f2a62ee9.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.b6801986.js",
+    "runtime-main.js.map": "./static/js/runtime-main.b6801986.js.map",
+    "static/js/2.aa9c4957.chunk.js": "./static/js/2.aa9c4957.chunk.js",
+    "static/js/2.aa9c4957.chunk.js.map": "./static/js/2.aa9c4957.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.81c95cb65e12bd2a6d4e1b1a6c72eee8.js": "./precache-manifest.81c95cb65e12bd2a6d4e1b1a6c72eee8.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/main.c167acc8.chunk.css.map": "./static/css/main.c167acc8.chunk.css.map",
+    "static/js/2.aa9c4957.chunk.js.LICENSE.txt": "./static/js/2.aa9c4957.chunk.js.LICENSE.txt",
+    "static/media/edit-black-48dp.svg": "./static/media/edit-black-48dp.a2198ba1.svg",
+    "static/media/logomedicaltec.svg": "./static/media/logomedicaltec.b89e164d.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b6801986.js",
+    "static/js/2.aa9c4957.chunk.js",
+    "static/css/main.c167acc8.chunk.css",
+    "static/js/main.f2a62ee9.chunk.js"
+  ]
+}
