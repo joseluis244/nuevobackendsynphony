@@ -1,13 +1,13 @@
 const moment = require('moment')
-const colores1=["#EE8434","#C95D63","#AE8799","#717EC3","#496DDB"]
-const colores2=["#FE938C","#E6B89C","#EAD2AC","#9CAFB7","#4281A4"]
+const colores1=["#2364AA","#73BFB8","#EA7317","#3DA5D9","#FEC601"]
+const colores2=["#8CB369","#F4A259","#BC4B51","#F4E285","#5B8E7D"]
 class Dashboard {
     constructor() {
         this.cantidadEstudios = 0
         this.usodisco = new GraficoPie();
         this.cantidaddia = new GraficoDona(colores1);
-        this.cantidadmes = new GraficoDona(colores2);
-        this.cantidaddiaEq = new GraficoDona(colores1);
+        this.cantidadmes = new GraficoDona(colores1);
+        this.cantidaddiaEq = new GraficoDona(colores2);
         this.cantidadmesEq = new GraficoDona(colores2);
         this.estudios24 = []
     }
@@ -103,13 +103,13 @@ class GraficoPie {
         this.labels = ["Libre","Usado"]
         this.datasets = [{
             data: [100,0],
-            backgroundColor: ["#20BF55","#FF1B1C"]
+            backgroundColor: ["#008148","#CC2936"]
         }]
     }
     asignareespacios(data){
         this.datasets = [{
             data: data,
-            backgroundColor: ["#20BF55","#FF1B1C"]
+            backgroundColor: ["#008148","#CC2936"]
         }]
     }
     verdatos() {
