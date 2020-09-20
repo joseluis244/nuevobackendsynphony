@@ -2,6 +2,7 @@ const express = require("express")
 const Router = require("express").Router()
 const fs = require('fs')
 const { exec } = require("child_process");
+const axios = require('axios').default;
 
 
 const consultassql = require("../mysql/consultas")
@@ -89,18 +90,11 @@ Router.get("/estudios",(req,res)=>{
     })
 })
 Router.delete("/estudios/:id",(req,res)=>{
-    exec(`curl -X DELETE http://localhost:8143/studies/${req.params.id}`, (error, stdout, stderr) => {
-        if (error) {
-            console.log(`error: ${error.message}`);
-            return;
-        }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
+    axios.delete(`http://localhost:8143/studies/${req.params.id}`)
+    .then((Ares)=>{
+        console.log(Ares.data)
         res.json(true)
-    });
+    })
     console.log(req.params.id)
 })
 

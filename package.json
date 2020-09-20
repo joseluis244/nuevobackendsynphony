@@ -9,6 +9,7 @@
   "author": "Jose Luis Camacho Moreno",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.20.0",
     "check-disk-space": "^2.1.0",
     "cors": "^2.8.5",
     "exceljs": "^4.1.1",
