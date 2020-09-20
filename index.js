@@ -3,14 +3,14 @@ const app = require('express')();
 const http = require('http').createServer(app);
 const cors = require("cors")
 const fs = require('fs');
-
+const https = require('https');
+const credentials
 let httpsc = process.argv[2]=="ssl"?true:false
 if(httpsc){
-  const https = require('https');
   
   const privateKey = fs.readFileSync('/var/www/html/medpacs/ssl/private.key');
   const certificate = fs.readFileSync('/var/www/html/medpacs/ssl/certificate.crt');
-  const credentials = {key: privateKey, cert: certificate};
+  credentials = {key: privateKey, cert: certificate};
 }
 
 const AppRouter = require("./app/router")
