@@ -4,7 +4,7 @@ const http = require('http').createServer(app);
 const cors = require("cors")
 const fs = require('fs');
 const https = require('https');
-const credentials
+let credentials
 let httpsc = process.argv[2]=="ssl"?true:false
 if(httpsc){
   
