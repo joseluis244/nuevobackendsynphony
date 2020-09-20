@@ -5,8 +5,8 @@ const cors = require("cors")
 const fs = require('fs');
 const https = require('https');
 let credentials
-let httpsc = process.argv[2]=="ssl"?true:false
-if(httpsc){
+let httpsc = process.argv[2]=="local"?true:false
+if(!httpsc){
   
   const privateKey = fs.readFileSync('/var/www/html/medpacs/ssl/private.key');
   const certificate = fs.readFileSync('/var/www/html/medpacs/ssl/certificate.crt');
@@ -20,7 +20,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use("/app",AppRouter)
 app.use("/administracion",AdminRouter)
-if(httpsc){
+if(!httpsc){
   var httpsServer = https.createServer(credentials, app);
   httpsServer.listen(5443,()=>{
     console.log('https-init');
