@@ -2,6 +2,8 @@ const mysql = require("mysql");
 const moment = require("moment");
 const consultasongo = require("../mongodb/consultas");
 const fs = require("fs")
+const DashboardC = require("../modelos/Dashboard");
+const SistemJS = require("../sistemdata/sistem")
 
 let sqlinit,sqlend
 
@@ -68,6 +70,7 @@ function BuscarSeries(ID,agregarfiles){
             let sql = `SELECT 
             A.publicId as SER_ID,
             A.internalId as SER_UID,
+            B.id as IDSERIE,
             B.value as MODALIDAD,
             C.value as NOMBRE
             FROM medicaltec.Resources A 
@@ -130,6 +133,62 @@ let con = mysql.createConnection(condata);
           });
     })
 }
+function subQ(con,sql){
+    return new Promise((Pres,Prej)=>{
+        con.query(sql, function (err, result) {
+            Pres(result)
+        })
+    })
+}
+function GetAE(Finit){
+    let con = mysql.createConnection(condata);
+    return new Promise((Pres,Prej)=>{
+        con.connect(function (err) {
+            if (err) throw err;
+            let sql = `SELECT value AS FECHA,id AS Iid FROM medicaltec.MainDicomTags where tagGroup=8 and tagElement=32 and value>= ${Finit} order by value desc;`;
+            con.query(sql, async function (err, result) {
+                if (err) throw err;
+                for (let index = 0; index < result.length; index++) {
+                    const element = result[index];
+                    let sql2 = `SELECT C.value as AE FROM medicaltec.Resources A
+                    left join (select * from medicaltec.Resources where resourceType=3) B on A.internalId=B.parentId
+                    left join (select * from medicaltec.Metadata where type=3) C on B.internalId=C.id
+                    where A.resourceType=2 and A.parentId=${element.Iid} limit 1;`;
+                    let sqlres1 = await subQ(con,sql2)
+                    result[index].AE = sqlres1[0].AE
+                }
+                Pres(result)
+                con.end();
+            })
+        })
+    })
+}
+function cantidadEstudios(){
+    let con = mysql.createConnection(condata);
+    return new Promise((Pres,Prej)=>{
+        let sql = `SELECT count(*) AS cantidad FROM medicaltec.Resources where resourceType=1;`;
+        con.query(sql,function (err, result) {
+            if (err) throw err;
+            Pres(result[0].cantidad)
+            con.end();
+        })
+    })
+}
+function Dashboard(){
+    return new Promise(async (Pres,Prej)=>{
+        let Finit = moment(new Date()).subtract(2,"Y").format("YYYYMMDD")
+        let Ffin = moment(new Date()).format("YYYYMMDD")
+        let Sres = await BuscarEstudios(Finit,Ffin,true,false,false)
+        DashboardC.addbymod(Sres)
+        let EqpAE = await GetAE(Finit)
+        DashboardC.addbyeqp(EqpAE)
+        let cantidad = await cantidadEstudios()
+        DashboardC.addcantidadequipos(cantidad)
+        let espacio = await SistemJS.infoespacio()
+        DashboardC.usodisco.asignareespacios(espacio)
+        Pres(DashboardC.Datos())
+    })
+}
 module.exports.BuscarEstudios = async function (inicio,final,agregarseries,agregarfiles,agregarinforme){
     if(inicio == undefined){
         inicio="19200101"
@@ -147,3 +206,4 @@ module.exports.ListaEstudios = async function (){
         let final=moment().format("YYYYMMDD")
     return BuscarEstudios(inicio,final,true,false,false)
 }
+module.exports.Dashboard = Dashboard

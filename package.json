@@ -9,11 +9,17 @@
   "author": "Jose Luis Camacho Moreno",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.20.0",
+    "check-disk-space": "^2.1.0",
     "cors": "^2.8.5",
+    "exceljs": "^4.1.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.27.0",
     "mongoose": "^5.9.27",
-    "mysql": "^2.18.1"
+    "mssql": "^6.2.1",
+    "mysql": "^2.18.1",
+    "node-disk-info": "^1.1.0",
+    "tedious": "^9.2.1"
   }
 }
