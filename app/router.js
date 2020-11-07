@@ -3,6 +3,7 @@ const Router = require("express").Router()
 
 const consultassql = require("../mysql/consultas")
 const consultasmongo = require("../mongodb/consultas")
+const FuncionesShare = require("./share")
 
 
 /* (consultassql.BuscarEstudios) buscar los estudios parametros 
@@ -12,6 +13,11 @@ Router.get('/buscarestudios', (req, res) => {
     .then((sqlres)=>{
         res.json(sqlres);
     })
+})
+Router.post("/share",(req,res)=>{
+    let mensaje = FuncionesShare.generarshare(req.body)
+    consultasmongo.saveshare(req.body)
+    res.json({mensaje})
 })
 // contenido autiguo ---------------------------------------------------
 Router.get('/getfiles/:id',(req,res)=>{

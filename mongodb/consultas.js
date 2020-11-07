@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Informes = require("./esquemas/Informes");
 const Usuarios = require("./esquemas/Usuarios");
 const Listaclientes = require("./esquemas/Listaclientes")
+const Share = require("./esquemas/share")
 mongoose.connect('mongodb://localhost/medpacs', {useNewUrlParser: true});
 const mongodb = mongoose.connection;
 
@@ -89,6 +90,10 @@ let BorrarDifucion = (id)=>{
         })
     })
 }
+let saveshare = (data)=>{
+    let share = new Share(data)
+    share.save((e)=>{})
+}
 module.exports.ExisteInforme = (ID)=>{
     return existeinforme(ID)
 }
@@ -101,3 +106,4 @@ module.exports.ListarDifucion = ListarDifucion
 module.exports.AgregarDifucion = AgregarDifucion
 module.exports.UpdateDifucion = UpdateDifucion
 module.exports.BorrarDifucion = BorrarDifucion
+module.exports.saveshare = saveshare
