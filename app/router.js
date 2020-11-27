@@ -19,6 +19,12 @@ Router.post("/share",(req,res)=>{
     consultasmongo.saveshare(req.body)
     res.json({mensaje})
 })
+Router.get("/listashare/:id",(req,res)=>{
+    consultasmongo.Buscarshares(req.params.id)
+    .then((DBres)=>{
+        res.json(DBres)
+    })
+})
 // contenido autiguo ---------------------------------------------------
 Router.get('/getfiles/:id',(req,res)=>{
     

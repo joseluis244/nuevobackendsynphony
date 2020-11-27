@@ -94,6 +94,13 @@ let saveshare = (data)=>{
     let share = new Share(data)
     share.save((e)=>{})
 }
+let Buscarshares = (id)=>{
+    return new Promise((Pres,Prej)=>{
+        Share.find({cliuid:id},(err,res)=>{
+            Pres(res)
+        })
+    })
+}
 module.exports.ExisteInforme = (ID)=>{
     return existeinforme(ID)
 }
@@ -107,3 +114,4 @@ module.exports.AgregarDifucion = AgregarDifucion
 module.exports.UpdateDifucion = UpdateDifucion
 module.exports.BorrarDifucion = BorrarDifucion
 module.exports.saveshare = saveshare
+module.exports.Buscarshares = Buscarshares
